@@ -1,18 +1,49 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
 
 export default function decorate(block) {
-  /* change to ul, li */
-  const ul = document.createElement('ul');
-  [...block.children].forEach((row) => {
-    const li = document.createElement('li');
-    while (row.firstElementChild) li.append(row.firstElementChild);
-    [...li.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
-      else div.className = 'cards-card-body';
-    });
-    ul.append(li);
+  // Adding a class to the block
+  block.classList.add('cards');
+
+  // Selecting all the children of the block
+  const children = Array.from(block.children);
+  
+  children.forEach((child) => {
+    const newWrapper = document.createElement('div');
+    newWrapper.classList.add('card-wrapper');
+    
+    const title = child.querySelector('h2');
+    const description = child.querySelector('p');
+    const link = child.querySelector('a');
+    const img = child.querySelector('img');
+
+    if (title) {
+      const titleWrapper = document.createElement('div');
+      titleWrapper.classList.add('card-title');
+      titleWrapper.appendChild(title);
+      newWrapper.appendChild(titleWrapper);
+    }
+
+    if (description) {
+      const descriptionWrapper = document.createElement('div');
+      descriptionWrapper.classList.add('card-description');
+      descriptionWrapper.appendChild(description);
+      newWrapper.appendChild(descriptionWrapper);
+    }
+
+    if (link) {
+      const linkWrapper = document.createElement('div');
+      linkWrapper.classList.add('card-link');
+      linkWrapper.appendChild(link);
+      newWrapper.appendChild(linkWrapper);
+    }
+
+    if (img) {
+      const imgWrapper = document.createElement('div');
+      imgWrapper.classList.add('card-image');
+      imgWrapper.appendChild(img);
+      newWrapper.appendChild(imgWrapper);
+    }
+
+    child.innerHTML = '';
+    child.appendChild(newWrapper);
   });
-  ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
-  block.textContent = '';
-  block.append(ul);
 }

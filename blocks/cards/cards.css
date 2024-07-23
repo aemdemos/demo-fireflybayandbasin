@@ -1,31 +1,49 @@
-.cards > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
-  grid-gap: 16px;
+
+.cards {
+  background-color: #2f3e46;
+  padding: 20px;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
 }
 
-.cards > ul > li {
-  border: 1px solid var(--dark-color);
-  background-color: var(--background-color);
+.cards .card-wrapper {
+  background-color: #354f52;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
-.cards .cards-card-body {
-  margin: 16px;
+.cards .card-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.cards .cards-card-image {
-  line-height: 0;
+.cards .card-description {
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
-.cards .cards-card-body > *:first-child {
-  margin-top: 0;
+.cards .card-link {
+  margin-top: 10px;
 }
 
-.cards > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+.cards .card-link a {
+  background-color: #1b1b1b;
+  color: #ffffff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.cards .card-link a:hover {
+  background-color: #333333;
+}
+
+.cards .card-image img {
+  max-width: 100%;
+  border-radius: 10px;
 }
